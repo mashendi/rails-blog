@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <br>
+    <br>
+    <h2><%= link_to 'Home', root_path %></h2>
+    <% if user_signed_in? %>
+      <h2>Welcome <%= current_user.full_name %></h2>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+    <% end %>
+    <% if !user_signed_in? %>
+      <%= link_to 'Sign In', new_user_session_path %>
+    <% end %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
